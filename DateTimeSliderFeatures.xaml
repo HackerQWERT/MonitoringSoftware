@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sliders="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders" Title="DateTime Slider"
+             x:Class="MonitoringSoftware.DateTimeSliderFeatures">
+    <sliders:SfDateTimeSlider Minimum="2020-01-01"
+                              Maximum="2021-01-01"
+                              Value="2020-07-01"
+                              ShowTicks="True"
+                              ShowLabels="True"
+                              IntervalType="Months">
+        <sliders:SfDateTimeSlider.Tooltip>
+            <sliders:SliderTooltip DateFormat="MM-dd-yyyy" />
+        </sliders:SfDateTimeSlider.Tooltip>
+    </sliders:SfDateTimeSlider>
+</ContentPage>

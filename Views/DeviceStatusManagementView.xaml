@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MonitoringSoftware.ViewModels"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MonitoringSoftware.Views.DeviceStatusManagementView"
+             x:DataType="viewModels:DeviceStatusManagementViewModel"
+             Title="设备状态管理"
+             BackgroundColor="Aquamarine">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:BoolToObjectConverter x:Key="OpenBoolToObjectConverter" TrueObject="打开" FalseObject="关闭" />
+            <toolkit:BoolToObjectConverter x:Key="FaultBoolToObjectConverter" TrueObject="正常" FalseObject="报错" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <tabView:SfTabView x:Name="TabView">
+        <tabView:SfTabView.Items>
+            <tabView:SfTabItem Header="温度">
+                <tabView:SfTabItem.Content>
+                    <Grid Margin="10,0,10,5" RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="*,*,*" >
+                        <Label  Grid.Row="0"  Grid.ColumnSpan="4" Text="温度传感器" TextColor="Red" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+                       
+                        <Entry TextColor="BlueViolet" Placeholder="设置阈值温度" Text="{Binding EntryThresholdTemperatueValue,Mode=OneWayToSource}" PlaceholderColor="CadetBlue" Grid.Row="1" Grid.Column="0" HeightRequest="90" ClearButtonVisibility="WhileEditing" Keyboard="Numeric"  MaxLength="3"/>
+                        <Label  Grid.Row="1"  Grid.Column="1" Text="°C" TextColor="Red" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="设置" Grid.Row="1" Grid.Column="2"   HeightRequest="70" Command="{Binding SetThresholdTemperatureCommand}"/>
+
+                        <Label  Grid.Row="2"  Grid.ColumnSpan="3" Text="{Binding ThresholdTemperatue,StringFormat='当前阈值温度:{0:F1}°C'}" TextColor="Red" FontSize="35" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+
+
+                        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="当前温度" TextColor="Red" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="3" Grid.Column="2" Text="{Binding CurrentTemperature,StringFormat='{0}°C'}" TextColor="Red" FontSize="49" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="设备状态" TextColor="Red" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding IsTemperatueSensorOpen,Converter={StaticResource OpenBoolToObjectConverter}}" TextColor="Red" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="4" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="切换" FontSize="25"  Command="{Binding SetTemperatureSensorStatusCommand}"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="故障情况" TextColor="Red" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding IsTemperatueSensorNormal,Converter={StaticResource FaultBoolToObjectConverter}}" TextColor="Red" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="5" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="修复" FontSize="25" Command="{Binding  RepairTemperatureSensorCommand}"/>
+     
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem Header="压力">
+                <tabView:SfTabItem.Content>
+                    <Grid Margin="10,0,10,5" RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="*,*,*" >
+                        <Label  Grid.Row="0"  Grid.ColumnSpan="4" Text="压力传感器" TextColor="BlueViolet" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+
+                        <Entry TextColor="BlueViolet" Placeholder="设置阈值压力"  Text="{Binding EntryThresholdPressureValue,Mode=OneWayToSource}" PlaceholderColor="CadetBlue" Grid.Row="1" Grid.Column="0" HeightRequest="90" ClearButtonVisibility="WhileEditing" Keyboard="Numeric"  MaxLength="3"/>
+                        <Label  Grid.Row="1"  Grid.Column="1" Text="kPa" TextColor="BlueViolet" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="设置" Grid.Row="1" Grid.Column="2"   HeightRequest="70" Command="{Binding SetThresholdPressureCommand}"/>
+
+                        <Label  Grid.Row="2"  Grid.ColumnSpan="3" Text="{Binding ThresholdPressure,StringFormat='当前阈值压力:{0:F1}kPa'}" TextColor="BlueViolet" FontSize="35" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+
+
+                        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="当前压力" TextColor="BlueViolet" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="3" Grid.Column="2" Text="{Binding CurrentPressure,StringFormat='{0}kPa'}" TextColor="BlueViolet" FontSize="49" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="设备状态" TextColor="BlueViolet" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding  IsPressureSensorOpen,Converter={StaticResource OpenBoolToObjectConverter}}" TextColor="BlueViolet" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="4" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="切换" FontSize="25" Command="{Binding SetPressureSensorStatusCommand}"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="故障情况" TextColor="BlueViolet" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding IsPressureSensorNormal,Converter={StaticResource FaultBoolToObjectConverter}}" TextColor="BlueViolet" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="5" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="修复" FontSize="25" Command="{Binding RepairPressureSensorCommand}"/>
+
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem Header="震动">
+                <tabView:SfTabItem.Content>
+                    <Grid Margin="10,0,10,5" RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="*,*,*" >
+                        <Label  Grid.Row="0"  Grid.ColumnSpan="4" Text="震动传感器" TextColor="DeepPink" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+
+                        <Entry TextColor="DeepPink" Placeholder="设置阈值震动"   Text="{Binding EntryThresholdVibrationValue,Mode=OneWayToSource}"   PlaceholderColor="CadetBlue" Grid.Row="1" Grid.Column="0" HeightRequest="90" ClearButtonVisibility="WhileEditing" Keyboard="Numeric"  MaxLength="3"/>
+                        <Label  Grid.Row="1"  Grid.Column="1" Text="g" TextColor="DeepPink" FontSize="40" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="设置" Grid.Row="1" Grid.Column="2"   HeightRequest="70" Command="{Binding SetThresholdVibrationCommand}"/>
+
+                        <Label  Grid.Row="2"  Grid.ColumnSpan="3" Text="{Binding ThresholdVibration,StringFormat='当前阈值震动:{0:F1}g'}" TextColor="DeepPink" FontSize="35" FontAttributes="Italic" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand"/>
+
+
+                        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="当前震动" TextColor="DeepPink" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="3" Grid.Column="2" Text="{Binding CurrentVibration,StringFormat='{0}g'}" TextColor="DeepPink" FontSize="49" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="设备状态" TextColor="DeepPink" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding  IsVibrationSensorOpen,Converter={StaticResource OpenBoolToObjectConverter}}" TextColor="DeepPink" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="4" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="切换" FontSize="25"  Command="{Binding SetVibrationSensorStatusCommand}"/>
+
+                        <Label Grid.Row="5" Grid.Column="0" Text="故障情况" TextColor="DeepPink" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding IsVibrationSensorNormal,Converter={StaticResource FaultBoolToObjectConverter}}" TextColor="DeepPink" FontSize="35" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Button Grid.Row="5" Grid.Column="2" WidthRequest="125" HeightRequest="90" HorizontalOptions="Center" VerticalOptions="Center" Text="修复" FontSize="25" Command="{Binding RepairVibrationSensorCommand}"/>
+
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+        </tabView:SfTabView.Items>
+    </tabView:SfTabView>
+
+</ContentPage>

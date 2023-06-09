@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MonitoringSoftware.ViewModels"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             x:Class="MonitoringSoftware.Views.RealTimeDetectionView"
+             x:DataType="viewModels:RealTimeDetectionViewModel"
+             Title="实时检测">
+        <Grid RowDefinitions="*,*,*">
+            <Label  Margin="10,10,10,10" TextColor="Crimson" Text="温度" HorizontalOptions="Start" VerticalOptions="Start" FontSize="25"/>
+            <gauge:SfRadialGauge   Grid.Row="0" WidthRequest="500">
+                <gauge:SfRadialGauge.Axes>
+                    <gauge:RadialAxis Interval="10"
+                                      Minimum="-40"
+                                    Maximum="100">
+                    <gauge:RadialAxis.AxisLineStyle>
+                        <gauge:RadialLineStyle ThicknessUnit="Factor" 
+                                               Thickness="0.1">
+                            <gauge:RadialLineStyle.GradientStops>
+                                <gauge:GaugeGradientStop Value="0"
+                                         Color="Blue" />
+                                <gauge:GaugeGradientStop Value="50"
+                                         Color="Green" />
+                                <gauge:GaugeGradientStop Value="70"
+                                         Color="Orange" />
+                                <gauge:GaugeGradientStop Value="100"
+                                         Color="Red" />
+                            </gauge:RadialLineStyle.GradientStops>
+                        </gauge:RadialLineStyle>
+                    </gauge:RadialAxis.AxisLineStyle>
+                        <!--<gauge:RadialAxis.Ranges>
+                            <gauge:RadialRange StartValue="-40"
+                                            EndValue="0"
+                                            Fill="Blue"/>
+                            <gauge:RadialRange StartValue="0"
+                                            EndValue="50"
+                                            Fill="Green"/>
+                            <gauge:RadialRange StartValue="50"
+                                            EndValue="70"
+                                            Fill="Orange"/>
+                            <gauge:RadialRange StartValue="70"
+                                            EndValue="100"
+                                            Fill="Red"/>
+                        </gauge:RadialAxis.Ranges>-->
+                        <gauge:RadialAxis.Pointers>
+                            <gauge:NeedlePointer Value="{Binding TemperaturePointerValue}"/>
+                        </gauge:RadialAxis.Pointers>
+                        <gauge:RadialAxis.Annotations>
+                        <gauge:GaugeAnnotation x:Name="TemperatureAnnotation"
+                                                DirectionUnit="Angle"
+                                                DirectionValue="90"
+                                                PositionFactor="0.5">
+                                <gauge:GaugeAnnotation.Content>
+                                <Label Text="{Binding TemperaturePointerValue,StringFormat='{0}°C'}"
+                                        FontSize="19"
+                                        FontAttributes="Italic" 
+                                        TextColor="Red"/>
+                                </gauge:GaugeAnnotation.Content>
+                            </gauge:GaugeAnnotation>
+                        </gauge:RadialAxis.Annotations>
+                    </gauge:RadialAxis>
+                </gauge:SfRadialGauge.Axes>
+            </gauge:SfRadialGauge>
+
+            <Label  Margin="10,10,10,10" Grid.Row="1" TextColor="DeepPink" Text="压力" HorizontalOptions="Start" VerticalOptions="Start" FontSize="25"/>
+            <gauge:SfRadialGauge   Grid.Row="1" WidthRequest="500">
+                <gauge:SfRadialGauge.Axes>
+                <gauge:RadialAxis Interval="10"
+                                                  Minimum="0"
+                                                Maximum="100">
+                    <gauge:RadialAxis.AxisLineStyle>
+                        <gauge:RadialLineStyle ThicknessUnit="Factor" 
+                                               Thickness="0.1">
+                            <gauge:RadialLineStyle.GradientStops>
+                                <gauge:GaugeGradientStop Value="0"
+                                         Color="Green" />
+                                <gauge:GaugeGradientStop Value="40"
+                                         Color="#FFF54EA2" />
+                                <gauge:GaugeGradientStop Value="70"
+                                         Color="Orange" />
+                                <gauge:GaugeGradientStop Value="100"
+                                         Color="Red" />
+                            </gauge:RadialLineStyle.GradientStops>
+                        </gauge:RadialLineStyle>
+                    </gauge:RadialAxis.AxisLineStyle>
+                    <gauge:RadialAxis.Pointers>
+                        <gauge:NeedlePointer Value="{Binding PressurePointerValue}"/>
+                    </gauge:RadialAxis.Pointers>
+                    <gauge:RadialAxis.Annotations>
+                        <gauge:GaugeAnnotation x:Name="PressureAnnotation"
+                                                            DirectionUnit="Angle"
+                                                            DirectionValue="90"
+                                                            PositionFactor="0.5">
+                            <gauge:GaugeAnnotation.Content>
+                                <Label Text="{Binding PressurePointerValue,StringFormat='{0}kPa'}"
+                                                    FontSize="19"
+                                                    FontAttributes="Italic" 
+                                                    TextColor="DeepPink"/>
+                            </gauge:GaugeAnnotation.Content>
+                        </gauge:GaugeAnnotation>
+                    </gauge:RadialAxis.Annotations>
+                </gauge:RadialAxis>
+            </gauge:SfRadialGauge.Axes>
+            </gauge:SfRadialGauge>
+
+            <Label  Margin="10,10,10,10" Grid.Row="2" TextColor="BlueViolet" Text="震动" HorizontalOptions="Start" VerticalOptions="Start" FontSize="25"/>
+            <gauge:SfRadialGauge   Grid.Row="2" WidthRequest="500">
+                <gauge:SfRadialGauge.Axes>
+                    <gauge:RadialAxis Interval="0.1"
+                                      Minimum="0"
+                                      Maximum="1"
+                                      LabelFormat="F1">
+                        <gauge:RadialAxis.AxisLineStyle>
+                            <gauge:RadialLineStyle ThicknessUnit="Factor" 
+                                                   Thickness="0.1"
+                                                   >
+                                <gauge:RadialLineStyle.GradientStops>
+                                    <gauge:GaugeGradientStop Value="0"
+                                             Color="DeepSkyBlue" />
+                                    <gauge:GaugeGradientStop Value="0.45"
+                                             Color="BlueViolet" />
+                                    <gauge:GaugeGradientStop Value="0.75"
+                                             Color="DeepPink" />
+                                    <gauge:GaugeGradientStop Value="1"
+                                             Color="Red" />
+                                </gauge:RadialLineStyle.GradientStops>
+                            </gauge:RadialLineStyle>
+                        </gauge:RadialAxis.AxisLineStyle>
+                        <gauge:RadialAxis.Pointers>
+                            <gauge:NeedlePointer Value="{Binding VibrationPointerValue}"/>
+                        </gauge:RadialAxis.Pointers>
+                        <gauge:RadialAxis.Annotations>
+                            <gauge:GaugeAnnotation x:Name="VibrationAnnotation"
+                                                                DirectionUnit="Angle"
+                                                                DirectionValue="90"
+                                                                PositionFactor="0.5">
+                                <gauge:GaugeAnnotation.Content>
+                                <Label Text="{Binding VibrationPointerValue,StringFormat='{0:F1}g'}"
+                                                        FontSize="19"
+                                                        FontAttributes="Italic" 
+                                                        TextColor="BlueViolet"/>
+                                </gauge:GaugeAnnotation.Content>
+                            </gauge:GaugeAnnotation>
+                        </gauge:RadialAxis.Annotations>
+                    </gauge:RadialAxis>
+                </gauge:SfRadialGauge.Axes>
+            </gauge:SfRadialGauge>
+
+    </Grid>
+
+</ContentPage>

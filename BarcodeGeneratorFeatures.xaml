@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoringSoftware.BarcodeGeneratorFeatures"
+			 xmlns:local="clr-namespace:MonitoringSoftware" Title="Barcode Generator"
+             xmlns:barcode="clr-namespace:Syncfusion.Maui.Barcode;assembly=Syncfusion.Maui.Barcode">
+    <ScrollView>
+        <StackLayout>
+            <barcode:SfBarcodeGenerator Value="http://www.syncfusion.com" HeightRequest="150"/>
+            <barcode:SfBarcodeGenerator Value="https://www.syncfusion.com/" 
+                                    ShowText="True" 
+                                    TextSpacing="15" 
+                                    HeightRequest="350" 
+                                    WidthRequest="350">
+                <barcode:SfBarcodeGenerator.Symbology>
+                    <barcode:QRCode/>
+                </barcode:SfBarcodeGenerator.Symbology>
+            </barcode:SfBarcodeGenerator>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MonitoringSoftware.ViewModels"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:dataGrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MonitoringSoftware.Views.EquipmentMaintenanceRecordsView"
+             x:DataType="viewModels:EquipmentMaintenanceRecordsViewModel"
+             Title="设备维护记录"
+             BackgroundColor="Aqua">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:BoolToObjectConverter x:Key="OpenBoolToObjectConverter" TrueObject="打开" FalseObject="关闭" />
+            <toolkit:BoolToObjectConverter x:Key="FaultBoolToObjectConverter" TrueObject="正常" FalseObject="报错" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <tabView:SfTabView x:Name="TabView">
+        <tabView:SfTabView.Items>
+            
+            <tabView:SfTabItem Header="温度">
+                <tabView:SfTabItem.Content>
+                    <dataGrid:SfDataGrid BackgroundColor="DeepSkyBlue" x:Name="TemperatureDataGrid" SortingMode="Single" ItemsSource="{Binding TemperatureSensorLogModels}"
+                                         AutoGenerateColumnsMode="None">
+    
+                        <dataGrid:SfDataGrid.Columns >
+                            <dataGrid:DataGridDateColumn   HeaderText="时间" MappingName="Time"/>
+                            <dataGrid:DataGridNumericColumn  HeaderText="温度" MappingName="Temperature"/>
+                            <dataGrid:DataGridTextColumn   MappingName="设备状态" DisplayBinding="{Binding DeviceStatus,Converter={StaticResource OpenBoolToObjectConverter}}"/>
+                            <dataGrid:DataGridTextColumn   MappingName="故障情况"  DisplayBinding="{Binding FaultCondition,Converter={StaticResource FaultBoolToObjectConverter}}"/>
+                        </dataGrid:SfDataGrid.Columns>
+                    </dataGrid:SfDataGrid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem Header="压力">
+                <tabView:SfTabItem.Content>
+                    <dataGrid:SfDataGrid BackgroundColor="Aquamarine" x:Name="PressureDataGrid" SortingMode="Single" ItemsSource="{Binding PressureSensorLogModels}"
+                                         AutoGenerateColumnsMode="None">
+
+                        <dataGrid:SfDataGrid.Columns >
+                            <dataGrid:DataGridDateColumn   HeaderText="时间" MappingName="Time"/>
+                            <dataGrid:DataGridNumericColumn  HeaderText="压力" MappingName="Pressure"/>
+                            <dataGrid:DataGridTextColumn   MappingName="设备状态" DisplayBinding="{Binding DeviceStatus,Converter={StaticResource OpenBoolToObjectConverter}}"/>
+                            <dataGrid:DataGridTextColumn   MappingName="故障情况"  DisplayBinding="{Binding FaultCondition,Converter={StaticResource FaultBoolToObjectConverter}}"/>
+                        </dataGrid:SfDataGrid.Columns>
+                    </dataGrid:SfDataGrid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+ 
+            <tabView:SfTabItem Header="震动">
+                <tabView:SfTabItem.Content>
+                    <dataGrid:SfDataGrid BackgroundColor="HotPink" x:Name="VibrationDataGrid" SortingMode="Single" ItemsSource="{Binding VibrationSensorLogModels}"
+                                         AutoGenerateColumnsMode="None">
+                        <dataGrid:SfDataGrid.Columns >
+                            <dataGrid:DataGridDateColumn   HeaderText="时间" MappingName="Time"/>
+                            <dataGrid:DataGridNumericColumn  HeaderText="震动" MappingName="Vibration"/>
+                            <dataGrid:DataGridTextColumn   MappingName="设备状态" DisplayBinding="{Binding DeviceStatus,Converter={StaticResource OpenBoolToObjectConverter}}"/>
+                            <dataGrid:DataGridTextColumn   MappingName="故障情况"  DisplayBinding="{Binding FaultCondition,Converter={StaticResource FaultBoolToObjectConverter}}"/>
+                        </dataGrid:SfDataGrid.Columns>
+                    </dataGrid:SfDataGrid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            
+        </tabView:SfTabView.Items>
+    </tabView:SfTabView>
+
+</ContentPage>
